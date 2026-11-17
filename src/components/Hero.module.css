@@ -1,0 +1,324 @@
+.hero {
+  --lx: 50%;
+  --ly: 44%;
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--ink);
+  isolation: isolate;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.depth {
+  position: absolute;
+  inset: -3%;
+}
+
+.plate {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.wordDepth {
+  grid-row: 3;
+}
+
+.img {
+  object-position: 50% 64%;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at var(--lx) var(--ly), transparent 35%, rgba(12, 11, 10, 0.55) 100%),
+    linear-gradient(180deg, rgba(12, 11, 10, 0.6) 0%, transparent 20%, transparent 58%, rgba(12, 11, 10, 0.72) 76%, rgba(12, 11, 10, 0.92) 100%);
+}
+
+/* A pool of light whose radius is --r (in vmax). Without JS it is fully open. */
+.dark {
+  --r: 160;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--lx) var(--ly),
+    rgba(12, 11, 10, 0) calc(var(--r) * 0.45vmax),
+    rgba(12, 11, 10, 0.985) calc(var(--r) * 1vmax + 1px)
+  );
+}
+
+@property --r {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 160;
+}
+
+:global(html.js) .dark {
+  /* The pool opens on the main thread (custom property), then the dark lifts on the compositor. */
+  animation:
+    light 3.1s linear 0.15s both,
+    lift 2.9s cubic-bezier(0.45, 0, 0.55, 1) 2.95s both;
+}
+
+@keyframes light {
+  0% {
+    --r: 0;
+  }
+  18% {
+    --r: 0;
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  }
+  100% {
+    --r: 30;
+  }
+}
+
+@keyframes lift {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+:global(html.js) .spark {
+  animation: spark 2.4s ease-in-out 0.35s both;
+}
+
+@keyframes spark {
+  0% {
+    opacity: 0;
+    visibility: visible;
+    transform: scale(0);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(2.6);
+  }
+}
+
+:global(html.js) .plate {
+  animation: settle 5.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.18);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
+
+.spark {
+  position: absolute;
+  left: var(--lx);
+  top: var(--ly);
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #ffe1b3;
+  box-shadow:
+    0 0 18px 6px rgba(255, 196, 120, 0.75),
+    0 0 80px 30px rgba(226, 167, 100, 0.35);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  opacity: 0;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  padding: 92px var(--gutter) 30px;
+}
+
+.kicker {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.word {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 -0.02em;
+  font-size: clamp(120px, 18vw, 400px);
+  line-height: 0.8;
+  letter-spacing: 0;
+  color: var(--ivory);
+  will-change: transform;
+}
+
+.box {
+  display: block;
+  overflow: hidden;
+  padding: 0.04em 0.02em 0.02em;
+  will-change: transform;
+}
+
+.letter {
+  display: block;
+}
+
+:global(html.js) .letter {
+  animation: rise 1.8s cubic-bezier(0.16, 1, 0.3, 1) calc(1.05s + var(--i) * 0.11s) both;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(112%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+:global(html.js) [data-hero-fade] {
+  animation: fade-up 1.3s cubic-bezier(0.16, 1, 0.3, 1) calc(2.1s + var(--i, 0) * 0.12s) both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.foot {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 4vw;
+  padding-top: 26px;
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.lede {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 36;
+  font-size: clamp(20px, 1.75vw, 30px);
+  line-height: 1.2;
+  max-width: 22em;
+}
+
+.ml {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.ml > span {
+  display: block;
+}
+
+:global(html.js) .ml > span {
+  animation: rise 1.4s cubic-bezier(0.16, 1, 0.3, 1) calc(2s + var(--i) * 0.14s) both;
+}
+
+.note {
+  max-width: 34em;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.cueLine {
+  position: relative;
+  width: 1px;
+  height: 44px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.cueLine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ivory);
+  transform: translateY(-100%);
+  animation: drip 2.4s var(--ease-io) 4s infinite;
+}
+
+@keyframes drip {
+  0% {
+    transform: translateY(-100%);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    --ly: 46%;
+  }
+
+  .content {
+    padding: 84px var(--gutter) 22px;
+  }
+
+  .kicker span:last-child {
+    display: none;
+  }
+
+  .word {
+    font-size: 30vw;
+  }
+
+  .foot {
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    padding-top: 18px;
+    margin-top: 16px;
+  }
+
+  .note {
+    display: none;
+  }
+
+  .lede {
+    font-size: 19px;
+  }
+}

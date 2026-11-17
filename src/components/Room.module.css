@@ -1,0 +1,292 @@
+.section {
+  position: relative;
+  background: var(--ink);
+}
+
+.scene {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.window {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  will-change: clip-path;
+}
+
+.dim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 11, 10, 0.45) 0%, rgba(12, 11, 10, 0.1) 40%, rgba(12, 11, 10, 0.82) 100%);
+}
+
+/* The arch sits in front of the vault; without motion it is simply not shown. */
+.door {
+  display: none;
+}
+
+:global(html.js) .door {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transform-origin: 50% 70%;
+  will-change: transform, opacity;
+}
+
+.doorImg {
+  object-position: 50% 62%;
+}
+
+.doorCap {
+  display: none;
+}
+
+:global(html.js) .doorCap {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 7vh;
+  transform: translateX(-50%);
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.label {
+  position: absolute;
+  top: 96px;
+  left: var(--gutter);
+  z-index: 2;
+}
+
+.title {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  font-size: clamp(48px, 7.6vw, 150px);
+  line-height: 0.96;
+  pointer-events: none;
+  text-shadow: 0 4px 60px rgba(12, 11, 10, 0.55);
+}
+
+.tl,
+.tr {
+  display: block;
+  will-change: transform;
+}
+
+.tl {
+  padding-left: 4vw;
+}
+
+.tr {
+  align-self: flex-end;
+  padding-right: 6vw;
+}
+
+.after {
+  position: absolute;
+  z-index: 2;
+  left: var(--gutter);
+  bottom: 7vh;
+  max-width: 24em;
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 28;
+  font-style: italic;
+  font-size: clamp(19px, 1.5vw, 26px);
+  line-height: 1.25;
+}
+
+.body {
+  padding: 20vh var(--gutter) 22vh;
+}
+
+.lead {
+  max-width: 21em;
+  margin-left: 16.6%;
+  font-size: clamp(28px, 3.1vw, 58px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.grid,
+.detailRow {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2vw;
+  row-gap: 12vh;
+}
+
+.grid {
+  margin-top: 18vh;
+}
+
+.fig {
+  position: relative;
+}
+
+.pic {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--char);
+}
+
+.a {
+  grid-column: 1 / span 8;
+}
+
+.a .pic,
+.d .pic {
+  aspect-ratio: 3 / 2;
+}
+
+.b {
+  grid-column: 10 / span 3;
+  margin-top: 24vh;
+}
+
+.b .pic,
+.c .pic,
+.f .pic {
+  aspect-ratio: 2 / 3;
+}
+
+.c {
+  grid-column: 2 / span 3;
+}
+
+.d {
+  grid-column: 3 / span 7;
+  margin-top: 4vh;
+}
+
+.details {
+  margin-top: 20vh;
+}
+
+.detailsHead {
+  margin-bottom: 6vh;
+}
+
+.e {
+  grid-column: 1 / span 4;
+}
+
+.e .pic {
+  aspect-ratio: 4 / 5;
+}
+
+.f {
+  grid-column: 6 / span 3;
+  margin-top: 12vh;
+}
+
+.g {
+  grid-column: 9 / span 4;
+  margin-top: 4vh;
+}
+
+.g .pic {
+  aspect-ratio: 4 / 3;
+}
+
+.cap {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.capNum {
+  flex: none;
+  color: var(--ivory);
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 900px) {
+  .label {
+    top: 84px;
+  }
+
+  .title {
+    font-size: clamp(44px, 12.5vw, 84px);
+  }
+
+  .tl {
+    padding-left: 0;
+  }
+
+  .tr {
+    padding-right: 0;
+  }
+
+  .body {
+    padding: 14vh var(--gutter) 14vh;
+  }
+
+  .lead {
+    margin-left: 0;
+    font-size: clamp(26px, 7vw, 40px);
+  }
+
+  .grid,
+  .detailRow {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    row-gap: 8vh;
+  }
+
+  .grid {
+    margin-top: 10vh;
+  }
+
+  .a,
+  .d {
+    grid-column: 1 / -1;
+    margin-inline: calc(-1 * var(--gutter));
+  }
+
+  .a .cap,
+  .d .cap {
+    padding-inline: var(--gutter);
+  }
+
+  .b {
+    grid-column: 2 / span 5;
+    margin-top: 0;
+  }
+
+  .c {
+    grid-column: 1 / span 4;
+  }
+
+  .d {
+    margin-top: 0;
+  }
+
+  .e {
+    grid-column: 1 / span 5;
+  }
+
+  .f {
+    grid-column: 3 / span 4;
+    margin-top: 0;
+  }
+
+  .g {
+    grid-column: 1 / span 4;
+    margin-top: 0;
+  }
+}

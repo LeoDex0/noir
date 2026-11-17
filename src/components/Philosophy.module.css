@@ -1,0 +1,264 @@
+.section {
+  position: relative;
+  background: var(--ivory);
+  color: var(--ink);
+  padding: 18vh var(--gutter) 14vh;
+  color-scheme: light;
+}
+
+.section :focus-visible {
+  outline-color: var(--oxblood-2);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2vw;
+}
+
+.head > :first-child {
+  grid-column: 1 / span 2;
+  padding-top: 1.3em;
+}
+
+.title {
+  grid-column: 3 / span 10;
+  font-size: clamp(44px, 6.1vw, 118px);
+  text-wrap: balance;
+}
+
+.title em {
+  color: var(--oxblood-2);
+}
+
+.silk {
+  grid-column: 3 / span 5;
+  margin-top: 5vh;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3d3832;
+  max-width: 30em;
+}
+
+.thread {
+  position: absolute;
+  inset: -6vh 0 -10vh;
+  width: 100%;
+  height: calc(100% + 16vh);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.thread path {
+  fill: none;
+  stroke: var(--oxblood-2);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.55;
+}
+
+:global(html.js) .thread path {
+  stroke-dashoffset: 1;
+}
+
+.body {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2vw;
+  margin-top: 16vh;
+}
+
+.pics {
+  grid-column: 1 / span 5;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 12vh;
+}
+
+.big {
+  position: relative;
+  width: 82%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--ivory-2);
+}
+
+.smallWrap {
+  position: absolute;
+  right: 0;
+  bottom: 4vh;
+  width: 42%;
+}
+
+.small {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--ivory-2);
+  box-shadow: 0 0 0 10px var(--ivory);
+}
+
+.picNote {
+  margin-top: 20px;
+  max-width: 22em;
+  font-size: 13px;
+  color: var(--stone-ink);
+}
+
+.principles {
+  position: relative;
+  z-index: 1;
+  grid-column: 7 / span 6;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 3vw;
+  row-gap: 7vh;
+  align-content: start;
+  padding-top: 4vh;
+}
+
+.principle {
+  background: var(--ivory);
+  display: grid;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-ink);
+}
+
+.pNum {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--oxblood-2);
+}
+
+.pTitle {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 48;
+  font-weight: 400;
+  font-size: clamp(28px, 2.4vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+.pText {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #3d3832;
+  max-width: 26em;
+}
+
+.strip {
+  position: relative;
+  margin-top: 16vh;
+}
+
+.stripPic {
+  position: relative;
+  aspect-ratio: 21 / 8;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.stripCap {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2vw;
+  align-items: end;
+  margin-top: 28px;
+}
+
+.stripQuote {
+  grid-column: 1 / span 8;
+  font-size: clamp(28px, 3vw, 54px);
+  line-height: 1.05;
+  font-style: italic;
+}
+
+.stripCap :global(.eyebrow) {
+  grid-column: 10 / span 3;
+  justify-self: end;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 13vh var(--gutter) 10vh;
+  }
+
+  .head,
+  .body,
+  .stripCap {
+    display: block;
+  }
+
+  .title {
+    margin-top: 24px;
+    font-size: clamp(40px, 10.5vw, 76px);
+  }
+
+  .silk {
+    margin-top: 28px;
+  }
+
+  .thread {
+    display: none;
+  }
+
+  .body {
+    margin-top: 9vh;
+  }
+
+  .pics {
+    padding-bottom: 0;
+  }
+
+  .big {
+    width: 78%;
+  }
+
+  .smallWrap {
+    bottom: 64px;
+    width: 44%;
+  }
+
+  .small {
+    box-shadow: 0 0 0 6px var(--ivory);
+  }
+
+  .principles {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+    margin-top: 10vh;
+    padding-top: 0;
+  }
+
+  .strip {
+    margin-top: 12vh;
+  }
+
+  .stripPic {
+    aspect-ratio: 4 / 3;
+    margin-inline: calc(-1 * var(--gutter));
+  }
+
+  .stripQuote {
+    display: block;
+    font-size: clamp(26px, 7.4vw, 40px);
+  }
+
+  .stripCap :global(.eyebrow) {
+    display: block;
+    margin-top: 18px;
+    text-align: left;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .principles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 5vw;
+  }
+}

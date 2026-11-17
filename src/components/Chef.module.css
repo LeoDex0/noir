@@ -1,0 +1,319 @@
+.section {
+  position: relative;
+  padding: 18vh var(--gutter) 18vh;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2vw;
+}
+
+.portrait {
+  grid-column: 1 / span 5;
+  grid-row: 1 / span 2;
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--char);
+}
+
+.portraitInner {
+  position: absolute;
+  inset: 0;
+}
+
+.name {
+  grid-column: 5 / span 8;
+  grid-row: 1;
+  position: relative;
+  z-index: 2;
+  margin-top: 10vh;
+  font-size: clamp(56px, 8.6vw, 168px);
+  line-height: 0.9;
+}
+
+.name :global(.eyebrow) {
+  display: block;
+  margin: 0 0 4vh 1.2vw;
+}
+
+.nameText {
+  display: block;
+  text-shadow: 0 2px 40px rgba(12, 11, 10, 0.5);
+}
+
+.story {
+  grid-column: 8 / span 5;
+  grid-row: 2;
+  align-self: end;
+  padding-top: 8vh;
+}
+
+.quote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 40;
+  font-style: italic;
+  font-size: clamp(24px, 2.1vw, 40px);
+  line-height: 1.18;
+}
+
+.bio {
+  display: grid;
+  gap: 16px;
+  margin-top: 6vh;
+  font-size: 15.5px;
+  color: var(--muted);
+  max-width: 31em;
+}
+
+.sign {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-top: 5vh;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 24px;
+}
+
+/* ---------- Hands at the pass ---------- */
+
+.hands {
+  position: relative;
+  margin: 22vh calc(-1 * var(--gutter)) 0;
+}
+
+.handsPic {
+  position: relative;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  background: var(--char);
+}
+
+.handsPic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 11, 10, 0) 35%, rgba(12, 11, 10, 0.88) 100%);
+}
+
+.handsInner {
+  position: absolute;
+  inset: 0;
+}
+
+.handsCap {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 6vh;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4vw;
+}
+
+.handsQuote {
+  display: block;
+  max-width: 14em;
+  font-style: italic;
+  font-size: clamp(30px, 3.6vw, 68px);
+  line-height: 1.04;
+}
+
+/* ---------- A day at NOIR ---------- */
+
+.dayHead {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2vw;
+  align-items: end;
+  margin-top: 24vh;
+}
+
+.dayTitle {
+  grid-column: 1 / span 7;
+  font-size: clamp(44px, 5.6vw, 108px);
+}
+
+.daySub {
+  grid-column: 9 / span 4;
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 22em;
+}
+
+.rail {
+  margin: 10vh calc(-1 * var(--gutter)) 0;
+}
+
+.track {
+  display: flex;
+  align-items: flex-start;
+  gap: 3.2vw;
+  width: max-content;
+  padding-inline: var(--gutter);
+  will-change: transform;
+}
+
+.step {
+  flex: none;
+  width: 25vw;
+  display: grid;
+  gap: 22px;
+}
+
+.stepPic {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--char);
+}
+
+.step[data-variant="1"] {
+  margin-top: 12vh;
+}
+
+.step[data-variant="1"] .stepPic {
+  aspect-ratio: 4 / 5;
+}
+
+.step[data-variant="2"] {
+  margin-top: 4vh;
+}
+
+.step[data-variant="2"] .stepPic {
+  aspect-ratio: 2 / 3;
+}
+
+.stepText {
+  display: grid;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.time {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 60;
+  font-size: 44px;
+  line-height: 1;
+}
+
+.stepTitle {
+  font-size: 17px;
+}
+
+.stepBody {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 24em;
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding: 13vh var(--gutter) 14vh;
+  }
+
+  .top {
+    display: block;
+  }
+
+  .portrait {
+    width: calc(100% + var(--gutter));
+    margin-left: calc(-1 * var(--gutter));
+    aspect-ratio: 4 / 5;
+  }
+
+  .name {
+    margin-top: 0.45em;
+    font-size: clamp(52px, 15vw, 120px);
+  }
+
+  .name :global(.eyebrow) {
+    display: none;
+  }
+
+  .story {
+    padding-top: 7vh;
+  }
+
+  .quote {
+    font-size: clamp(24px, 6.6vw, 36px);
+  }
+
+  .hands {
+    margin-top: 14vh;
+  }
+
+  .handsPic {
+    aspect-ratio: 4 / 5;
+  }
+
+  .handsCap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    bottom: 5vh;
+  }
+
+  .handsQuote {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+
+  .dayHead {
+    display: block;
+    margin-top: 16vh;
+  }
+
+  .dayTitle {
+    font-size: clamp(42px, 12vw, 80px);
+  }
+
+  .daySub {
+    margin-top: 18px;
+  }
+
+  .rail {
+    margin-top: 6vh;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .step {
+    width: min(76vw, 420px);
+    scroll-snap-align: start;
+  }
+
+  .step[data-variant="1"] {
+    margin-top: 6vh;
+  }
+
+  .step[data-variant="2"] {
+    margin-top: 2vh;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .portrait {
+    width: 72%;
+    margin-left: 0;
+  }
+
+  .name {
+    margin-top: -0.6em;
+    margin-left: 34%;
+  }
+}
